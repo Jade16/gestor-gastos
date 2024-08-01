@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<title>Gastos</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-light" style="background-color: #E4C1FF;">
+			<ul class="nav justify-content-start">
+				<li class="nav-item">
+					<a class="navbar-brand" href="/inicial"> <!--inicial -->
+					   	<img src="{% static 'imagens/inicial.svg' %}" width="30" height="30" alt="Inicial">
+					</a>
+				</li>
+				<li class="nav-item">
+			  		<span class="navbar-brand mb-0 h1">Gastos</span>
+			  	</li>
+		  	</ul>
+			<ul class="nav justify-content-end">
+			  	<li class="nav-item">
+			    	<a class="navbar-brand" href="/configuracoes"> <!--configuracoes -->
+			    		<img src="{% static 'imagens/configuracoes.svg' %}" width="30" height="30" alt="Configurações">
+			  		</a>
+			  	</li>			  
+			 	 <li class="nav-item">
+			   		<a class="navbar-brand" href="/usuario">
+			    	<!-- inserir a imagem do usuario -->
+			    		<img src="{% static 'imagens/usuario.svg' %}" width="30" height="30" alt="Usuário">
+			  		</a>
+			  	</li>
+			</ul>
+		</nav>
+
+		<table class="table table-sm" action="{% url 'listar_gastos' %}">
+			<thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Valor</th>
+			      <th scope="col">Origem</th>
+			      <th scope="col">Data</th>
+			      <!-- <th scope="col">Recebeu</th> -->
+			    </tr>
+			</thead>
+			<tbody>
+				{% for x in gastos %}
+					<tr>
+						<td> {{ x.id }}</td>
+						<td>{{ x.valor}}</td>
+						<td>{{ x.origem}}</td>
+						<td>{{ x.data}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<!-- Botão para acionar modal -->
+		<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#novoGasto">
+			<img src="{% static 'imagens/add.svg' %}" width="20" height="20" alt="Adicionar">
+  			Adicione um novo gasto
+		</button>
+		<!-- modal para adicionar um novo recebimento -->
+		<div class="modal fade" id="novoGasto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  			<div class="modal-dialog modal-dialog-centered" role="document">
+    			<div class="modal-content">
+      				<div class="modal-header">
+        				<h5 class="modal-title" id="exampleModalLabel">Novo Gasto</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+      				<div class="modal-body">
+        				<form method="POST" action="{% url 'criar_gasto' %}">
+        					{% csrf_token %}
+						  	<div class="form-group">
+						    	<label for="valorGasto">Valor Gasto</label>
+						    	<input type="number" step="0.01" class="form-control" id="valorGastp" name="valor" placeholder="Valor" required>
+						  	</div>
+						  	<div class="form-group">
+						   		<label for="origemGasto">Origem do Valor Gasto</label>
+						    	<input type="text" class="form-control" id="origemGasto" name="origem" placeholder="Origem" required>
+						  	</div>
+						  	<div class="form-group">
+						   		<label for="dataGasto">Data do Gasto</label>
+						    	<input type="date" class="form-control" id="dataGasto" name="data" required>
+						  	</div>
+						  	<div class="form-group">
+						   		<select class="form-control" id="tipoGasto" name="tipo" required>
+						   			<option>Tipo de Gasto</option>
+  									<option>Variável</option>
+  									<option>Fixo</option>
+								</select>
+						  	</div>
+						  	<div class="form-group">
+    							<label for="descricaoGasto">Descrição do Gasto</label>
+    							<textarea type="descricao" class="form-control" id="descricaoGasto" name="desdcricao" rows="3" required></textarea>
+  							</div>
+						  	<div class="form-group form-check">
+						    	<input type="checkbox" class="form-check-input" id="repeticao" value="M">
+						    	<label class="form-check-label" for="repeticao">O valor se repete</label>
+						  	</div>
+						  	<div class="form-group">
+						   		<select class="form-control" id="tipoPagamento" name="tipo" required>
+						   			<option>Forma de Pagamento</option>
+  									<option>Crédito</option>
+  									<option>Débito</option>
+								</select>
+						  	</div>
+						  	<div class="form-group form-check">
+						    	<input type="checkbox" class="form-check-input" id="repeticao">
+						    	<label class="form-check-label" for="repeticao" value="M">Foi parcelado</label>
+						  	</div>
+						  	<div class="form-group">
+						   		<label for="parcelas">Quantidade de Parcelas</label>
+						    	<type="number" class="form-control" id="parcelas" name="parcelas" placeholder="Quantidade de Parcelas" required>
+						  	</div>
+						  	<button type="submit" class="btn btn-primary">Salvar Gasto</button>
+						</form>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      				</div>
+    			</div>
+  			</div>
+		</div>
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</body>
+</html>

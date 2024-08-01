@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<title>Configurações</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-light" style="background-color: #E4C1FF;">
+			<ul class="nav justify-content-start">
+				<li class="nav-item">
+					<a class="navbar-brand" href="/inicial"> <!--inicial -->
+					   	<img src="{% static 'imagens/inicial.svg' %}" width="30" height="30" alt="Inicial">
+					</a>
+				</li>
+				<li class="nav-item">
+			  		<span class="navbar-brand mb-0 h1">Configurações</span>
+			  	</li>
+		  	</ul>
+			<ul class="nav justify-content-end">
+			  	<li class="nav-item">
+			    	<a class="navbar-brand" href="/configuracoes"> <!--configuracoes -->
+			    		<img src="{% static 'imagens/configuracoes.svg' %}" width="30" height="30" alt="Configurações">
+			  		</a>
+			  	</li>			  
+			 	 <li class="nav-item">
+			   		<a class="navbar-brand" href="/usuario">
+			    	<!-- inserir a imagem do usuario -->
+			    		<img src="{% static 'imagens/usuario.svg' %}" width="30" height="30" alt="Usuário">
+			  		</a>
+			  	</li>
+			</ul>
+		</nav>
+
+		<div class="container" style="margin-top: 5px;">
+			<div class="border border-dark" style="padding: 20px; margin-top: 10px;">
+				<h2>Configurações Gerais</h2>
+				<div class="form-group">
+					<!-- modo escuro ou claro -->
+					<select class="form-control">
+					  	<option>Aparência da Tela</option>
+					  	<option>Claro</option>
+					  	<option>Escuro</option>
+					  	<option>Automático</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="border border-dark" style="padding: 20px; margin-top: 10px;">
+				<h2>Configurações da Página de Recebimentos</h2>
+				<!-- deseja notificacao? -->
+				<div class="form-group form-check">
+				    <input type="checkbox" class="form-check-input" id="notificacaoRecebimentos">
+				    <label class="form-check-label" for="notificacaoRecebimentos">Receber notificação quando a data do meu recebimento se aproximar.</label>
+				</div>
+				<!-- notificação perguntando do recebimento com quantos dias de antecedencia? -->
+				<div class="form-group">
+					<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+				        <option selected>Notificar quantos dias antes?</option>
+				        <option value="0">No dia</option>
+				        <option value="1">1</option>
+				        <option value="2">2</option>
+				        <option value="3">3</option>
+				    </select>
+				</div>
+			    <!-- personalizar notificação -->
+			</div>
+
+			<div class="border border-dark" style="padding: 20px; margin-top: 10px;">
+				<h2>Configurações da Página de Gastos</h2>
+				<div class="form-group">
+					<!-- notificação perguntando se teve gastos no dia -->
+					<div class="form-group form-check">
+					    <input type="checkbox" class="form-check-input" id="notificacaoRecebimentos">
+					    <label class="form-check-label" for="notificacaoRecebimentos">Receber notificação para perguntar se ocorreram gastos.</label>
+					</div>
+					<div class="form-group">
+						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+					        <option selected>Período entre notificações</option>
+					        <option value="1">Uma vez por dia</option>
+					        <option value="2">A cada dois dias</option>
+					        <option value="3">Uma vez por semana</option>
+					        <option value="4">Uma vez a cada duas semanas</option>
+					        <option value="3">Uma vez a cada quinzena</option>
+					        <option value="3">Uma vez por mês</option>
+					    </select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="border border-dark" style="padding: 20px; margin-top: 10px;">
+				<h2>Configurações da Página de Contas</h2>
+				<!-- notificação para pagar a conta com quantos dias de antecedencia? -->
+				<div class="form-group form-check">
+					    <input type="checkbox" class="form-check-input" id="notificacaoRecebimentos">
+					    <label class="form-check-label" for="notificacaoRecebimentos">Receber notificação para perguntar se ocorreram gastos.</label>
+					</div>
+					<div class="form-group">
+						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+					        <option selected>Período entre notificações</option>
+					        <option value="1">Uma vez por dia</option>
+					        <option value="2">A cada dois dias</option>
+					        <option value="3">Uma vez por semana</option>
+					        <option value="4">Uma vez a cada duas semanas</option>
+					        <option value="3">Uma vez a cada quinzena</option>
+					        <option value="3">Uma vez por mês</option>
+					    </select>
+					</div>
+			</div>
+
+			<div class="border border-dark" style="padding: 20px; margin-top: 10px;">
+				<h2>Configurações do Perfil de Usuário</h2>
+				<!-- mudar foto de usuário -->
+				<div class="form-group">
+					<label for="fotoPerfil">Selecione uma foto de perfil</label>
+    				<input type="file" class="form-control-file" id="fotoPerfil">
+				</div>
+				<!-- mudar senha -->
+				<!-- mudar email -->
+				<div class="form-group">
+				    <label for="exampleInputEmail1">Alterar email</label>
+				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seu email">
+				    <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Alterar Senha</label>
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+				</div>
+				<div class="form-group">
+				    <label for="exampleInputPassword1">Confirmar senha</label>
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+				</div>
+			</div>
+			<!-- <h2>Configurações de Fatura do Cartão de Crédito</h2> -->
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</body>
+</html>
