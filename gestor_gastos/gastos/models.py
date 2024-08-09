@@ -4,24 +4,22 @@ from django.db import models
 class Gastos(models.Model):
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     origem = models.CharField(max_length=255)
+    data = models.DateField()
     TIPO_CHOICES = [
-        ('A', 'Alimentação'),
+        ('M', 'Mercado'),
         ('S', 'Saúde'),
         ('L', 'Laser'),
         ('T', 'Transporte'),
-        ('H', 'Higiene'),        
+        ('A', 'Alimentação'),        
     ]
     tipo = models.CharField(max_length=1, choices=TIPO_CHOICES)
-    data = models.DateField()
-    descricao = # nao sei
-    REPETICAO_CHOICES = [
-        ('Q', 'Quinzenal'),
-        ('S', 'Semanal'),
-        ('M', 'Mensal'),
-        # ('A', 'Anual'),
-        ('N', 'Não se repete'),
+    descricao = models.TextField(max_length=500)
+    PAGAMENTO = [
+        ('D', 'Débito'),
+        ('C', 'Crédito'),
     ]
-    repeticao = models.CharField(max_length=1, choices=REPETICAO_CHOICES, blank=True, null=True)
+    tipoPagamento = models.CharField(max_length=1, choices=PAGAMENTO)
+    parcelas = models.IntegerField()
     
     def __str__(self):
         return f"{self.origem} - {self.valor}"

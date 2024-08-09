@@ -13,7 +13,7 @@
 		<nav class="navbar navbar-light" style="background-color: #E4C1FF;">
 			<ul class="nav justify-content-start">
 				<li class="nav-item">
-					<a class="navbar-brand" href="/inicial"> <!--inicial -->
+					<a class="navbar-brand" href="/"> <!--inicial -->
 					   	<img src="{% static 'imagens/inicial.svg' %}" width="30" height="30" alt="Inicial">
 					</a>
 				</li>
@@ -78,7 +78,7 @@
         					{% csrf_token %}
 						  	<div class="form-group">
 						    	<label for="valorGasto">Valor Gasto</label>
-						    	<input type="number" step="0.01" class="form-control" id="valorGastp" name="valor" placeholder="Valor" required>
+						    	<input type="number" step="0.01" class="form-control" id="valorGasto" name="valor" placeholder="Valor" required>
 						  	</div>
 						  	<div class="form-group">
 						   		<label for="origemGasto">Origem do Valor Gasto</label>
@@ -91,32 +91,31 @@
 						  	<div class="form-group">
 						   		<select class="form-control" id="tipoGasto" name="tipo" required>
 						   			<option>Tipo de Gasto</option>
-  									<option>Variável</option>
-  									<option>Fixo</option>
+  									<option value="M">Mercado</option>
+  									<option value="S">Saúde</option>
+  									<option value="L">Laser</option>
+  									<option value="T">Transporte</option>
+  									<option value="A">Alimentação</option>
 								</select>
 						  	</div>
 						  	<div class="form-group">
     							<label for="descricaoGasto">Descrição do Gasto</label>
-    							<textarea type="descricao" class="form-control" id="descricaoGasto" name="desdcricao" rows="3" required></textarea>
+    							<textarea type="descricao" class="form-control" id="descricaoGasto" name="descricao" rows="3" required></textarea>
   							</div>
-						  	<div class="form-group form-check">
-						    	<input type="checkbox" class="form-check-input" id="repeticao" value="M">
-						    	<label class="form-check-label" for="repeticao">O valor se repete</label>
-						  	</div>
 						  	<div class="form-group">
-						   		<select class="form-control" id="tipoPagamento" name="tipo" required>
+						   		<select class="form-control" id="tipoPagamento" name="tipoPagamento" required>
 						   			<option>Forma de Pagamento</option>
-  									<option>Crédito</option>
-  									<option>Débito</option>
+  									<option value="C">Crédito</option>
+  									<option value="D">Débito</option>
 								</select>
 						  	</div>
 						  	<div class="form-group form-check">
-						    	<input type="checkbox" class="form-check-input" id="repeticao">
-						    	<label class="form-check-label" for="repeticao" value="M">Foi parcelado</label>
+						    	<input type="checkbox" class="form-check-input" id="parcelado">
+						    	<label class="form-check-label" for="parcelado" value="M">Foi parcelado</label>
 						  	</div>
 						  	<div class="form-group">
 						   		<label for="parcelas">Quantidade de Parcelas</label>
-						    	<type="number" class="form-control" id="parcelas" name="parcelas" placeholder="Quantidade de Parcelas" required>
+						    	<input type="number" class="form-control" id="parcelas" name="parcelas" placeholder="Quantidade de Parcelas" required>
 						  	</div>
 						  	<button type="submit" class="btn btn-primary">Salvar Gasto</button>
 						</form>

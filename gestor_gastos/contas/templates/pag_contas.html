@@ -13,7 +13,7 @@
 		<nav class="navbar navbar-light" style="background-color: #E4C1FF;">
 			<ul class="nav justify-content-start">
 				<li class="nav-item">
-					<a class="navbar-brand" href="/inicia"> <!--inicial -->
+					<a class="navbar-brand" href="/"> <!--inicial -->
 					   	<img src="{% static 'imagens/inicial.svg' %}" width="30" height="30" alt="Inicial">
 					</a>
 				</li>
@@ -36,15 +36,35 @@
 			</ul>
 		</nav>
 
-		<!-- inserir tabela de recebimentos aqui. Como? Nao sei -->
+		<table class="table table-sm" action="{% url 'listar_contas' %}">
+			<thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Valor</th>
+			      <th scope="col">Origem</th>
+			      <th scope="col">Data</th>
+			      <!-- <th scope="col">Recebeu</th> -->
+			    </tr>
+			</thead>
+			<tbody>
+				{% for x in contas %}
+					<tr>
+						<td> {{ x.id }}</td>
+						<td>{{ x.valor}}</td>
+						<td>{{ x.origem}}</td>
+						<td>{{ x.dataVencimento}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
 		<!-- Botão para acionar modal -->
-		<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ExemploModalCentralizado">
+		<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#novaConta">
 			<img src="{% static 'imagens/add.svg' %}" width="20" height="20" alt="Adicionar">
   			Adicione uma nova conta
 		</button>
 		<!-- modal para adicionar um novo recebimento -->
-		<div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="novaConta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   			<div class="modal-dialog modal-dialog-centered" role="document">
     			<div class="modal-content">
       				<div class="modal-header">
@@ -54,27 +74,28 @@
         				</button>
       				</div>
       				<div class="modal-body">
-        				<form>
+        				<form method="POST" action="{% url 'criar_conta' %}">
+        					{% csrf_token %}
 						  	<div class="form-group">
 						    	<label for="valorConta">Valor da Conta</label>
-						    	<input type="float" class="form-control" id="valorConta" aria-describedby="valor" placeholder="Valor">
-						    	<!-- <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small> -->
+						    	<input type="float" class="form-control" id="valorConta" name="valor" aria-describedby="valor" placeholder="Valor" required>
 						  	</div>
 						  	<div class="form-group">
 						   		<label for="origemConta">Origem da Conta</label>
-						    	<input type="text" class="form-control" id="origemConta" placeholder="Origem">
+						    	<input type="text" class="form-control" id="origemConta" name="origem" placeholder="Origem" required>
 						  	</div>
 						  	<div class="form-group">
-						   		<label for="dataConta">Data de Vencimentom da Conta</label>
-						    	<input type="data" class="form-control" id="dataConta" placeholder="Data">
+						   		<label for="dataConta">Data de Vencimento da Conta</label>
+						    	<input type="date" class="form-control" id="dataConta" name="dataVencimento" placeholder="Data" required>
 						  	</div>
 						  	<div class="form-group">
-						   		<select class="form-control">
+						   		<select class="form-control" id="tipoConta" name="tipoConta" required>
 						   			<option>Tipo de Conta</option>
-  									<option>Aluguel</option>
-  									<option>Água</option>
-  									<option>Luz</option>
-  									<option>Internet</option>
+  									<option value="A">Aluguel</option>
+  									<option value="G">Água</option>
+  									<option value="L">Luz</option>
+  									<option value="I">Internet</option>
+  									<option value="O">Outros</option>
 								</select>
 						  	</div>
 						  	<div class="form-group form-check">

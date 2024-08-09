@@ -1,11 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Gastos
+from .forms import GastoForm
 from django.http import HttpResponse
 from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 
 def gastos(request):
 	if request.method == 'POST':
-		print("Recebendo POST request")
-		form = RecebimentoForm(request.POST)
+		print("Gastos POST request")
+		form = GastoForm(request.POST)
 		if form.is_valid():
 			print("Form is valid")
 			form.save()
@@ -14,7 +19,7 @@ def gastos(request):
 		else:
 			print("Formulário inválido: ", form.errors)
 	else:
-		form = RecebimentoForm()
+		form = GastoForm()
 	
 	context = {'form': form}
 	return render(request, 'pag_gastos.html', context)
